@@ -1,0 +1,7 @@
+hdf5_ds/*
+!hdf5_ds/.keep
+*.pyc
+venv/
+runs/
+__pycache__/
+data/*

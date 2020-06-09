@@ -1,0 +1,21 @@
+{
+    "experiment_name": "dual_ae_c",
+    "train_dataset_file": "hdf5_ds/spec_tags_top_1000",
+    "validation_dataset_file": "hdf5_ds/spec_tags_top_1000_val",
+
+    "audio_loss_weight": 5,
+    "tag_loss_weight": 5,
+    "contrastive_loss_weight": 10,
+
+    "contrastive_temperature": 0.1,
+
+    "epochs": 200,
+    "batch_size": 128,
+    "learning_rate": 5e-3,
+
+    "device": "cpu",
+
+    "id2tag_file": "json/id2token_top_1000.json",
+    "log_interval": 200,
+    "save_model_every": 20
+}
