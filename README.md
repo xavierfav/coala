@@ -52,8 +52,8 @@ data
      └───  nsynth-test
 ```
 
-Keeping existing sub-directories as they are for each dataset.
-However, for NSynth, you will have to manually create the audio_selected/ folder and put there the files that are listed in the values of the dictionary stored in `json/nsynth_selected_sounds_per_class.json`. When nothing is specified,
+keeping existing sub-directories as they are for each dataset.
+However, for NSynth, you will have to manually create the audio_selected/ folder and put there the files that are listed in the values of the dictionary stored in `json/nsynth_selected_sounds_per_class.json`.
   
 
 3. compute the embeddings with the pre-trained (or re-trained) embedding models runing the `encode.py` script.
