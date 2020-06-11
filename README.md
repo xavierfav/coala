@@ -37,23 +37,23 @@ If you want to re-compute the classification accuracies on the downstream tasks,
    - [NSynth](https://magenta.tensorflow.org/datasets/nsynth)
 2. place their content into the directory `data/` as following:
 
-```
-data
-└─── UrbanSound8K
-│     └─── audio
-│     └─── metadata
-└─── GTZAN
-│     └─── genres
-│     └─── test_filtered.txt
-│     └─── train_filtered.txt
-└─── nsynth
-     └─── nsynth-train
-           └─── audio_selected
-     └───  nsynth-test
-```
+    ```
+    data
+    └─── UrbanSound8K
+    │     └─── audio
+    │     └─── metadata
+    └─── GTZAN
+    │     └─── genres
+    │     └─── test_filtered.txt
+    │     └─── train_filtered.txt
+    └─── nsynth
+         └─── nsynth-train
+               └─── audio_selected
+         └───  nsynth-test
+    ```
 
-keeping existing sub-directories as they are for each dataset.
-However, for NSynth, you will have to manually create the audio_selected/ folder and put there the files that are listed in the values of the dictionary stored in `json/nsynth_selected_sounds_per_class.json`.
+    keeping existing sub-directories as they are for each dataset.
+    However, for NSynth, you will have to manually create the audio_selected/ folder and put there the files that are listed in the values of the dictionary stored in `json/nsynth_selected_sounds_per_class.json`.
   
 
 3. compute the embeddings with the pre-trained (or re-trained) embedding models runing the `encode.py` script.
