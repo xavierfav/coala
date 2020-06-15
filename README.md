@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ### Training the embedding models
 
 
-If you want to train the embeddings from scratch, you will need to download the dataset at [ZENODO LINK]() and place the hdf5 files in the `hdf5_ds/` directory.
+If you want to train the embeddings from scratch, you will need to download the dataset from [this Zenodo page](https://zenodo.org/record/3887261#.Xud1BuftaUk) and place the hdf5 files in the `hdf5_ds/` directory.
 Then you can launch the training of an embedding model by running for instance:
 ```
 python train_dual_ae.py 'configs/dual_ae_c.json'
