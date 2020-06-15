@@ -8,6 +8,7 @@ import torch
 from torch.utils import data
 from torch import nn, optim
 from torchvision.utils import save_image
+import numpy as np
 try:
     from torch.utils.tensorboard import SummaryWriter
 except:
@@ -32,6 +33,7 @@ class DualAETrainer():
         self.tag_loss_weight = params['tag_loss_weight']
         self.contrastive_loss_weight = params['contrastive_loss_weight']
         self.contrastive_temperature = params['contrastive_temperature']
+        self.tag_masking_ratio = params['tag_masking_ratio']
         self.epochs = params['epochs']
         self.batch_size = params['batch_size']
         self.learning_rate = params['learning_rate']
@@ -136,9 +138,24 @@ class DualAETrainer():
             x = data.view(-1, 1, 96, 96).to(self.device)
             tags = tags.float().to(self.device)
 
+            if self.tag_masking_ratio:
+                # compute random mask
+                tags_masked = tags.clone()
+                num_tags = tags.shape[-1]
+                for idx in range(tags.shape[0]):
+                    idx_existing_tags = (tags_masked[idx] == 1).nonzero().squeeze()
+                    if idx_existing_tags.dim() > 0:
+                        index = np.random.choice(idx_existing_tags.cpu(), int(len(idx_existing_tags.cpu())*self.tag_masking_ratio), replace=False)
+                        mask = np.ones((num_tags,), dtype=np.float32)
+                        mask[index] = 0
+                        mask = torch.from_numpy(mask).to(self.device)
+                        tags_masked[idx] = tags_masked[idx].mul_(mask)
+            else:
+                tags_masked = tags
+
             # encode
             z_audio, z_d_audio = self.audio_encoder(x)
-            z_tags, z_d_tags = self.tag_encoder(tags)
+            z_tags, z_d_tags = self.tag_encoder(tags_masked)
 
             # audio reconstruction
             x_recon = self.audio_decoder(z_audio)

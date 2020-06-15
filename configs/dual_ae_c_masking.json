@@ -1,5 +1,5 @@
 {
-    "experiment_name": "dual_ae_c",
+    "experiment_name": "dual_ae_c_m",
     "train_dataset_file": "hdf5_ds/spec_tags_top_1000",
     "validation_dataset_file": "hdf5_ds/spec_tags_top_1000_val",
 
@@ -15,7 +15,7 @@
     "batch_size": 128,
     "learning_rate": 5e-3,
 
-    "device": "cpu",
+    "device": "cuda",
 
     "id2tag_file": "json/id2token_top_1000.json",
     "log_interval": 200,
