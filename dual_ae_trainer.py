@@ -145,7 +145,11 @@ class DualAETrainer():
                 for idx in range(tags.shape[0]):
                     idx_existing_tags = (tags_masked[idx] == 1).nonzero().squeeze()
                     if idx_existing_tags.dim() > 0:
-                        index = np.random.choice(idx_existing_tags.cpu(), int(len(idx_existing_tags.cpu())*self.tag_masking_ratio), replace=False)
+                        index = np.random.choice(
+                            idx_existing_tags.cpu(), 
+                            int(len(idx_existing_tags.cpu())*self.tag_masking_ratio), 
+                            replace=False
+                        )
                         mask = np.ones((num_tags,), dtype=np.float32)
                         mask[index] = 0
                         mask = torch.from_numpy(mask).to(self.device)
