@@ -16,8 +16,8 @@ from utils import compute_spectrogram
 from models_t1000 import AudioEncoder, TagEncoder, CNN
 
 
-scaler = pickle.load(open('../scaler_top_1000.pkl', 'rb'))
-id2tag = json.load(open('../json/id2token_top_1000.json', 'rb'))
+scaler = pickle.load(open('./scaler_top_1000.pkl', 'rb'))
+id2tag = json.load(open('./json/id2token_top_1000.json', 'rb'))
 tag2id = {tag: id for id, tag in id2tag.items()}
 
 
