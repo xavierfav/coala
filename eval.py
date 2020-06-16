@@ -33,8 +33,8 @@ EMBEDDING_FOLDERS_US8K = {
 EMBEDDING_FOLDERS_GTZAN = {
     'mfcc': './data/embeddings/gtzan/mfcc/',
     'cnn': './data/embeddings/gtzan/embeddings_cnn/',
-    'e_c_200': './data/embeddings/gtzan/embeddings_dual_e_c/',
-    'ae_c_200': './data/embeddings/gtzan/embeddings_dual_ae_c/',
+    'e_c': './data/embeddings/gtzan/embeddings_dual_e_c/',
+    'ae_c': './data/embeddings/gtzan/embeddings_dual_ae_c/',
 }
 
 
@@ -124,7 +124,7 @@ def eval_US8K(embedding_folder):
 
     print(f'\nScores: {scores}, mean: {np.mean(scores)}\n')
 
-    return np.mean(scores_svm)
+    return np.mean(scores)
 
 
 # --------------- GTZAN ---------------
