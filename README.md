@@ -1,6 +1,6 @@
 # COALA: Co-Aligned Autoencoders for Learning Semantically Enriched Audio Representations
 
-This is the repository for the method presented in the paper: "COALA: Co-Aligned Autoencoders for Learning Semantically Enriched Audio Representations" by X. Favory, [K. Drossos](https://kdrossos.net), [T. Virtanen](https://tutcris.tut.fi/portal/en/persons/tuomas-virtanen(210e58bb-c224-40a9-bf6c-5b786297e841).html), and X. Serra.
+This is the repository for the method presented in the paper: "COALA: Co-Aligned Autoencoders for Learning Semantically Enriched Audio Representations" by X. Favory, [K. Drossos](https://kdrossos.net), [T. Virtanen](https://tutcris.tut.fi/portal/en/persons/tuomas-virtanen(210e58bb-c224-40a9-bf6c-5b786297e841).html), and X. Serra. ([arXiv](https://arxiv.org/abs/2006.08386))
 
 
 <p align="center">
