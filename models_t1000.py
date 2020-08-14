@@ -216,7 +216,7 @@ class AudioEncoderRes(nn.Module):
     def __init__(self,
                 n_channels=128,
                 embedding_size=1152):
-        super(ShortChunkCNN_Res, self).__init__()
+        super(AudioEncoderRes, self).__init__()
 
         self.layer1 = Res_2d(1, n_channels, stride=2)
         self.layer2 = Res_2d(n_channels, n_channels, stride=2)
