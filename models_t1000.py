@@ -218,24 +218,24 @@ class AudioEncoderRes(nn.Module):
                 embedding_size=1152):
         super(ShortChunkCNN_Res, self).__init__()
 
-    self.layer1 = Res_2d(1, n_channels, stride=2)
-    self.layer2 = Res_2d(n_channels, n_channels, stride=2)
-    self.layer3 = Res_2d(n_channels, n_channels*2, stride=2)
-    self.layer4 = Res_2d(n_channels*2, n_channels*2, stride=2)
-    self.layer5 = Res_2d(n_channels*2, n_channels*2, stride=2)
-    self.layer6 = Res_2d(n_channels*2, n_channels*2, stride=2)
-    self.layer7 = Res_2d(n_channels*2, n_channels*4, stride=2)
+        self.layer1 = Res_2d(1, n_channels, stride=2)
+        self.layer2 = Res_2d(n_channels, n_channels, stride=2)
+        self.layer3 = Res_2d(n_channels, n_channels*2, stride=2)
+        self.layer4 = Res_2d(n_channels*2, n_channels*2, stride=2)
+        self.layer5 = Res_2d(n_channels*2, n_channels*2, stride=2)
+        self.layer6 = Res_2d(n_channels*2, n_channels*2, stride=2)
+        self.layer7 = Res_2d(n_channels*2, n_channels*4, stride=2)
 
-    self.dense1 = nn.Linear(n_channels*4, n_channels*4)
-    self.bn = nn.BatchNorm1d(n_channels*4)
-    self.dense2 = nn.Linear(n_channels*4, embedding_size)
-    self.dropout = nn.Dropout(0.25)
-    self.relu = nn.ReLU()
+        self.dense1 = nn.Linear(n_channels*4, n_channels*4)
+        self.bn = nn.BatchNorm1d(n_channels*4)
+        self.dense2 = nn.Linear(n_channels*4, embedding_size)
+        self.dropout = nn.Dropout(0.25)
+        self.relu = nn.ReLU()
 
-    self.fc_audio = Sequential(
-        Linear(embedding_size, embedding_size, bias=False),
-        Dropout(0.25),
-    )
+        self.fc_audio = Sequential(
+            Linear(embedding_size, embedding_size, bias=False),
+            Dropout(0.25),
+        )
 
     def forward(self, x):
         # CNN
