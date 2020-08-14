@@ -42,7 +42,8 @@ class DualAETrainer():
         self.save_model_every = params['save_model_every']
 
     def init_models(self):
-        self.audio_encoder = AudioEncoder()
+        # self.audio_encoder = AudioEncoder()
+        self.audio_encoder = AudioEncoderRes()
         self.audio_decoder = AudioDecoder()
         self.tag_encoder = TagEncoder()
         self.tag_decoder = TagDecoder()
