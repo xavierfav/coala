@@ -229,8 +229,16 @@ class AudioEncoderRes(nn.Module):
         self.dense1 = nn.Linear(n_channels*4, n_channels*4)
         self.bn = nn.BatchNorm1d(n_channels*4)
         self.dense2 = nn.Linear(n_channels*4, embedding_size)
-        self.dropout = nn.Dropout(0.25)
-        self.relu = nn.ReLU()
+        self.dropout1 = nn.Dropout(0.3)
+        self.dropout2 = nn.Dropout(0.3)
+        self.dropout3 = nn.Dropout(0.3)
+        self.dropout4 = nn.Dropout(0.3)
+        self.dropout5 = nn.Dropout(0.3)
+        self.dropout6 = nn.Dropout(0.3)
+        self.dropout7 = nn.Dropout(0.3)
+        self.dropout8 = nn.Dropout(0.3)
+        self.relu1 = nn.ReLU()
+        self.relu2 = nn.ReLU()
 
         self.fc_audio = Sequential(
             Linear(embedding_size, embedding_size, bias=False),
@@ -240,11 +248,17 @@ class AudioEncoderRes(nn.Module):
     def forward(self, x):
         # CNN
         x = self.layer1(x)
+        x = self.dropout1(x)
         x = self.layer2(x)
+        x = self.dropout2(x)
         x = self.layer3(x)
+        x = self.dropout3(x)
         x = self.layer4(x)
+        x = self.dropout4(x)
         x = self.layer5(x)
+        x = self.dropout5(x)
         x = self.layer6(x)
+        x = self.dropout6(x)
         x = self.layer7(x)
         x = x.squeeze(2)
 
@@ -254,12 +268,13 @@ class AudioEncoderRes(nn.Module):
         x = x.squeeze(2)
 
         # Dense
+        x = self.dropout7(x)
         x = self.dense1(x)
         x = self.bn(x)
-        x = self.relu(x)
-        x = self.dropout(x)
+        x = self.relu1(x)
+        x = self.dropout8(x)
         x = self.dense2(x)
-        z = nn.ReLU()(x)
+        z = self.relu2(x)
 
         z_d = self.fc_audio(z)
 
