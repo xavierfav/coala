@@ -4,7 +4,7 @@ the top 1000 select tags.
 """
 import torch
 from torch import nn
-from torch.nn import Sequential, Linear, Dropout, ReLU, Sigmoid, Conv2d, ConvTranspose2d, BatchNorm1d, BatchNorm2d, LeakyReLU
+from torch.nn import Sequential, Linear, Dropout, ReLU, Sigmoid, Conv2d, ConvTranspose2d, BatchNorm1d, BatchNorm2d, LeakyReLU, Softmax
 
 
 class Flatten(nn.Module):
@@ -220,23 +220,15 @@ class AudioEncoderRes(nn.Module):
 
         self.layer1 = Res_2d(1, n_channels, stride=2)
         self.layer2 = Res_2d(n_channels, n_channels, stride=2)
-        self.layer3 = Res_2d(n_channels, n_channels*2, stride=2)
-        self.layer4 = Res_2d(n_channels*2, n_channels*2, stride=2)
-        self.layer5 = Res_2d(n_channels*2, n_channels*2, stride=2)
-        self.layer6 = Res_2d(n_channels*2, n_channels*2, stride=2)
-        self.layer7 = Res_2d(n_channels*2, n_channels*4, stride=2)
+        self.layer3 = Res_2d(n_channels, n_channels, stride=2)
+        self.layer4 = Res_2d(n_channels, n_channels, stride=2)
+        self.layer5 = Res_2d(n_channels, n_channels, stride=2)
 
-        self.dense1 = nn.Linear(n_channels*4, n_channels*4)
-        self.bn = nn.BatchNorm1d(n_channels*4)
-        self.dense2 = nn.Linear(n_channels*4, embedding_size)
         self.dropout1 = nn.Dropout(0.3)
         self.dropout2 = nn.Dropout(0.3)
         self.dropout3 = nn.Dropout(0.3)
         self.dropout4 = nn.Dropout(0.3)
         self.dropout5 = nn.Dropout(0.3)
-        self.dropout6 = nn.Dropout(0.3)
-        self.dropout7 = nn.Dropout(0.3)
-        self.dropout8 = nn.Dropout(0.3)
         self.relu1 = nn.ReLU()
         self.relu2 = nn.ReLU()
 
@@ -257,24 +249,7 @@ class AudioEncoderRes(nn.Module):
         x = self.dropout4(x)
         x = self.layer5(x)
         x = self.dropout5(x)
-        x = self.layer6(x)
-        x = self.dropout6(x)
-        x = self.layer7(x)
-        x = x.squeeze(2)
-
-        # Global Max Pooling
-        if x.size(-1) != 1:
-            x = nn.MaxPool1d(x.size(-1))(x)
-        x = x.squeeze(2)
-
-        # Dense
-        x = self.dropout7(x)
-        x = self.dense1(x)
-        x = self.bn(x)
-        x = self.relu1(x)
-        x = self.dropout8(x)
-        x = self.dense2(x)
-        z = self.relu2(x)
+        z = x.view(x.size(0), -1)
 
         z_d = self.fc_audio(z)
 
