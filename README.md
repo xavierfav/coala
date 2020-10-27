@@ -1,10 +1,10 @@
-# Learning contextual tag embeddings for cross-modal alignment of audio and tags
+# COALA: Co-Aligned Autoencoders for Learning Semantically Enriched Audio Representations
 
-This is the repository for the method presented in the paper: "Learning contextual tag embeddings for cross-modal alignment of audio and tags" by X. Favory, [K. Drossos](https://kdrossos.net), [T. Virtanen](https://tutcris.tut.fi/portal/en/persons/tuomas-virtanen(210e58bb-c224-40a9-bf6c-5b786297e841).html), and X. Serra. (arXiv soon)
+This is the repository for the method presented in the paper: "COALA: Co-Aligned Autoencoders for Learning Semantically Enriched Audio Representations" by X. Favory, [K. Drossos](https://kdrossos.net), [T. Virtanen](https://tutcris.tut.fi/portal/en/persons/tuomas-virtanen(210e58bb-c224-40a9-bf6c-5b786297e841).html), and X. Serra. ([arXiv](https://arxiv.org/abs/2006.08386))
 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/10927428/97285752-e4c5ab80-1842-11eb-9393-f10dbf0daac9.png" width="450" />
+  <img src="https://user-images.githubusercontent.com/10927428/84180915-9331a580-aa88-11ea-847d-10a5886f6052.png" width="450" />
 </p>
 
 
@@ -23,7 +23,7 @@ pip install -r requirements.txt
 If you want to train the embeddings from scratch, you will need to download the dataset from [this Zenodo page](https://zenodo.org/record/3887261#.Xud1BuftaUk) and place the hdf5 files in the `hdf5_ds/` directory.
 Then you can launch the training of an embedding model by running for instance:
 ```
-python train_dual_ae.py 'configs/ae_w2v_128_self_c_4h.json'
+python train_dual_ae.py 'configs/dual_ae_c.json'
 ```
 The config file may be edited for instance to select which device to use for training (`'cuda'` or `'cpu'`).
 
@@ -68,8 +68,22 @@ Here is a simple example to extract embedding chunks given an audio file:
 
 ```python
 from encode import return_loaded_model, extract_audio_embedding_chunks
-from models_t1000_att import AudioEncoder
+from models_t1000 import AudioEncoder
 
-model = return_loaded_model(AudioEncoder, 'saved_models/ae_w2v_128_selfatt_c_4h/audio_encoder_epoch_200.pt')
+model = return_loaded_model(AudioEncoder, 'saved_models/dual_ae_c/audio_encoder_epoch_200.pt')
 embedding, _ = extract_audio_embedding_chunks(model, '<path/to/audio/file>')
+```
+
+
+---
+```
+   __         __            
+ /"  "\     /"  "\                            _    
+(  (\  )___(  /)  )                          | |    
+ \               /             ___ ___   __ _| | __ _ 
+ /               \            / __/ _ \ / _` | |/ _` |
+/    () ___ ()    \          | (_| (_) | (_| | | (_| |
+|      (   )      |           \___\___/ \__,_|_|\__,_|
+ \      \_/      /           
+   \...__!__.../              
 ```
